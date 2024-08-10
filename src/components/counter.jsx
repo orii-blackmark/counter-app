@@ -2,21 +2,23 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
-    tags: ["tag1", "tag2", "tag3", "tag4"],
+    value: this.props.value, // Correctly initialized
+    tags: [],
   };
-  styles = {
-    fontSize: 20,
-    fontWeight: "bold",
+
+  handleIncrement = () => {
+    this.setState({ value: this.state.value + 1 });
   };
 
   render() {
+    console.log(this.props);
     return (
-      <React.Fragment>
-        <span style={this.styles} className={this.getBadgeClasses()}>
-          {this.formatCount()}
-        </span>
-        <button style={{ fontSize: 20 }} className="btn btn-secondary btn-sm">
+      <div>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
           Increment
         </button>
         <ul>
@@ -24,18 +26,19 @@ class Counter extends Component {
             <li key={tag}>{tag}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </div>
     );
   }
+
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "warning" : "primary";
+    classes += this.state.value === 0 ? "warning" : "primary"; // Changed count to value
     return classes;
   }
 
   formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
+    const { value } = this.state; // Changed count to value
+    return value === 0 ? "Zero" : value; // Changed count to value
   }
 }
 
