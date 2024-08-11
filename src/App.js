@@ -13,6 +13,15 @@ class App extends Component {
     ],
   };
 
+  constructor(props) {
+    super(props);
+    console.log("App - Constructor", this.props);
+    // this.state = this.props.something;
+  }
+  componentDidMount() {
+    console.log("app - Mounted");
+  }
+
   handleIncrement = (counter) => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
@@ -34,6 +43,7 @@ class App extends Component {
     this.setState({ counters });
   };
   render() {
+    console.log("App - rendered");
     return (
       <React.Fragment>
         <NavBar
